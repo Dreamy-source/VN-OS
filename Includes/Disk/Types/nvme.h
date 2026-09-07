@@ -2,6 +2,7 @@
 #define NVME_H
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "../../Utils/port.h"
 #include "../../System/pci.h"
 #include "../disk_state.h"

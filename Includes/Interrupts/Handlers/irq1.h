@@ -70,29 +70,33 @@ void irq1_handler()
             for (int i = bufstart; buffer[i] != '\0'; i++) {
                 print_sym(buffer[i], color);
             }
+            print_str("\n", 0x07);
             for (int i = 0; i < 80; i++) {
                 buffer[i] = 0;
             }
             print_str("\n", 0x07);
+            console_request("[#]: ", 0x07);
         }
         if (buffer[0] == 'c' && buffer[1] == 'l' && buffer[2] == 'e' && buffer[3] == 'a' && buffer[4] == 'n') {
             clear_screen();
             cursor_pos = 0;
             cursor_pos_after_print = 0;
+            console_request("[#]: ", 0x07);
         }
-        
         if (cursor_pos >= 80 * 25) {
-            clear_screen();
+            scroll_screen();
             cursor_clear_symbol();
-            cursor_pos = 0;
+            console_request("[#]: ", 0x07);
         }
     } else if (scancode == 0x0E) {  // Backspace
         if (cursor_pos > cursor_pos_after_print) {
-            cursor_pos--;
-            if (buffer_pos > 0) buffer_pos--;
-            print_sym(' ', 0x07);
-            cursor_clear_symbol();
-            cursor_pos--;
+            if (cursor_pos % 80 != cursor_pos_after_request % 80) {
+                cursor_pos--;
+                if (buffer_pos > 0) buffer_pos--;
+                print_sym(' ', 0x07);
+                cursor_clear_symbol();
+                cursor_pos--;
+            }
         }
 
     } else if (scancode == 0x39) {  // Space

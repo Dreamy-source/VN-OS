@@ -82,7 +82,7 @@ print:
 dap:
     db 0x10
     db 0x00
-    dw 0x0009
+    dw 20
     dw 0x0000
     dw kernel_segment
     dq 0x0001
