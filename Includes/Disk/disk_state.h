@@ -1,7 +1,6 @@
 #ifndef DISK_STATE_H
 #define DISK_STATE_H
 
-#include <stdint.h>
 #include <stdbool.h>
 
 typedef struct {

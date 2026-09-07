@@ -2,7 +2,7 @@
 #define PCI_H
 
 #include <stdint.h>
-#include "port.h"
+#include "../Utils/port.h"
 
 uint32_t pci_read(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset) {
     // bus - index of bus (0-255)

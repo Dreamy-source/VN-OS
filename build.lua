@@ -13,7 +13,7 @@ while true do
             gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c Main/kernel.c -o bin/kernel_c.o
             ld -m elf_i386 -Ttext 0x9000 -o bin/kernel.bin bin/kernel_asm.o bin/kernel_c.o --oformat binary
             cat bin/boot.bin bin/kernel.bin > bin/vanilla.bin
-            qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin
+            qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin -drive file=bin/vanilla.img,if=none,id=nvme0 -device nvme,drive=nvme0,serial=VNFS001
         ]])
     end
     if input == 2 then
@@ -34,7 +34,7 @@ while true do
             gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c Main/kernel.c -o bin/kernel_c.o
             ld -m elf_i386 -Ttext 0x9000 -o bin/kernel.bin bin/kernel_asm.o bin/kernel_c.o --oformat binary
             cat bin/boot.bin bin/kernel.bin > bin/vanilla.bin
-            qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin -d int
+            qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin -drive file=bin/vanilla.img,if=none,id=nvme0 -device nvme,drive=nvme0,serial=VNFS001 -d int
         ]])
     end
 end
