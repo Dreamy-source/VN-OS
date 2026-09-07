@@ -1,8 +1,8 @@
 #ifndef IRQ1_H
 #define IRQ1_H
 
-#include "video.h"
-#include "pic.h"
+#include "../../Video/vga.h"
+#include "../pic.h"
 
 static unsigned char buffer[80];
 static unsigned char history[80];

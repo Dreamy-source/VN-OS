@@ -1,14 +1,14 @@
 static int cursor_pos_after_print = 0;
 
 #include <stdint.h>
-#include "Includes/proc.h"
-#include "Includes/port.h"
-#include "Includes/video.h"
-#include "Includes/pic.h"
-#include "Includes/idt.h"
-#include "Includes/irq0.h"
-#include "Includes/irq1.h"
-#include "Includes/pc_speaker.h"
+#include "../Includes/Utils/proc.h"
+#include "../Includes/Utils/port.h"
+#include "../Includes/Video/vga.h"
+#include "../Includes/Interrupts/pic.h"
+#include "../Includes/Interrupts/idt.h"
+#include "../Includes/Interrupts/Handlers/irq0.h"
+#include "../Includes/Interrupts/Handlers/irq1.h"
+#include "../Includes/Audio/pc_speaker.h"
 
 extern void asm_irq0();
 extern void asm_irq1();

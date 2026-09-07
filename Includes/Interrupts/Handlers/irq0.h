@@ -1,8 +1,8 @@
 #ifndef IRQ0_H
 #define IRQ0_H
 
-#include "pic.h"
-#include "video.h"
+#include "../../Video/vga.h"
+#include "../pic.h"
 
 unsigned int timer_ticks = 0;
 

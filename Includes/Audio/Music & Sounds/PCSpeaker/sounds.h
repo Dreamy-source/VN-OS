@@ -1,7 +1,7 @@
 #ifndef PC_SPEAKER_SOUNDS_H
 #define PC_SPEAKER_SOUNDS_H
 
-#include "../../pc_speaker.h"
+#include "../pc_speaker.h"
 
 void happy_birthday_sound()
 {

@@ -2,8 +2,8 @@
 #define PC_SPEAKER_H
 
 #include <stdint.h>
-#include "port.h"
-#include "irq0.h"
+#include "../Utils/port.h"
+#include "../Interrupts/Handlers/irq0.h"
 
 #define C4  262
 #define D4  294

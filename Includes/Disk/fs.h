@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 #define READ_BLOCKS 8
-#define BLOCK_SIZE  512 * READ_BLOCKS
+#define BLOCK_SIZE  512
 
 // superblock
 // 1 block - 512 bytes
@@ -32,10 +32,10 @@ static void vnfs_init()
     Superblock.signature[0]      = 'V';
     Superblock.signature[1]      = 'N';
     Superblock.total_blocks      = 0;          // stub
-    Superblock.block_size        = BLOCK_SIZE;
+    Superblock.block_size        = BLOCK_SIZE * READ_BLOCKS;
     Superblock.file_count        = 0;          // stub
     Superblock.inode_table_start = 1;
-    Superblock.data_start;       = 10;
+    Superblock.data_start        = 10;
 }
 
 #endif

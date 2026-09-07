@@ -8,9 +8,9 @@ while true do
     if input == 1 then
         os.execute([[
             clear
-            nasm -f bin boot.asm -o bin/boot.bin
-            nasm -f elf32 kernel.asm -o bin/kernel_asm.o
-            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c kernel.c -o bin/kernel_c.o
+            nasm -f bin Main/boot.asm -o bin/boot.bin
+            nasm -f elf32 Main/kernel.asm -o bin/kernel_asm.o
+            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c Main/kernel.c -o bin/kernel_c.o
             ld -m elf_i386 -Ttext 0x9000 -o bin/kernel.bin bin/kernel_asm.o bin/kernel_c.o --oformat binary
             cat bin/boot.bin bin/kernel.bin > bin/vanilla.bin
             qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin
@@ -19,9 +19,9 @@ while true do
     if input == 2 then
         os.execute([[
             clear
-            nasm -f bin boot.asm -o bin/boot.bin
-            nasm -f elf32 kernel.asm -o bin/kernel_asm.o
-            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c kernel.c -o bin/kernel_c.o
+            nasm -f bin Main/boot.asm -o bin/boot.bin
+            nasm -f elf32 Main/kernel.asm -o bin/kernel_asm.o
+            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c Main/kernel.c -o bin/kernel_c.o
             ld -m elf_i386 -Ttext 0x9000 -o bin/kernel.bin bin/kernel_asm.o bin/kernel_c.o --oformat binary
             cat bin/boot.bin bin/kernel.bin > bin/vanilla.bin
         ]])
@@ -29,9 +29,9 @@ while true do
     if input == 3 then
         os.execute([[
             clear
-            nasm -f bin boot.asm -o bin/boot.bin
-            nasm -f elf32 kernel.asm -o bin/kernel_asm.o
-            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c kernel.c -o bin/kernel_c.o
+            nasm -f bin Main/boot.asm -o bin/boot.bin
+            nasm -f elf32 Main/kernel.asm -o bin/kernel_asm.o
+            gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -c Main/kernel.c -o bin/kernel_c.o
             ld -m elf_i386 -Ttext 0x9000 -o bin/kernel.bin bin/kernel_asm.o bin/kernel_c.o --oformat binary
             cat bin/boot.bin bin/kernel.bin > bin/vanilla.bin
             qemu-system-x86_64 -audiodev pa,id=audio0 -machine pcspk-audiodev=audio0 -drive format=raw,file=bin/vanilla.bin -d int
