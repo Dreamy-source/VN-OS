@@ -1,5 +1,5 @@
-#ifndef SATA_H
-#define SATA_H
+#ifndef NVME_H
+#define NVME_H
 
 #include <stdint.h>
 #include "../../Utils/port.h"
@@ -8,9 +8,9 @@
 
 #define MSC          0x01  // Mass Storage Controller
 #define CLASS_OFFSET 8
-#define SATA         0x06
+#define NVME         0x08
 
-static void check_sata()
+static void check_nvme()
 {
     for (uint16_t bus = 0; bus < 256; bus++) {
         for (uint8_t slot = 0; slot < 32; slot++) {
@@ -19,9 +19,8 @@ static void check_sata()
 
             if (class == MSC) {
                 uint8_t subclass = (class_code >> 16) & 0xFF;
-                if (subclass == SATA) {
-                    DiskState.SATA = true;
-                    return;
+                if (subclass == NVME) {
+                    DiskState.NVMe = true;
                 }
             }
         }

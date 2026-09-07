@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "../../Utils/port.h"
+#include "../../System/pci.h"
 #include "../disk_state.h"
 
 static void check_ata()
