@@ -21,7 +21,7 @@
 // ^class   ^subclass ^progif  ^revision
 // progif - programming interface (Prog IF)
 
-static void check_sata()
+static void sata_check()
 {
     for (uint16_t bus = 0; bus < BUS_MAX; bus++) {
         for (uint8_t slot = 0; slot < SLOT_MAX; slot++) {

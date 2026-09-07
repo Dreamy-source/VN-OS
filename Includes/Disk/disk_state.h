@@ -7,6 +7,7 @@ typedef struct {
     bool ATA;
     bool SATA;
     bool NVMe;
+    uint32_t total_sectors;
 } __attribute__((packed)) diskState;
 
 static diskState DiskState;

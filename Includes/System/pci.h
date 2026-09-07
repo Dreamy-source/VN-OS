@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "../Utils/port.h"
 
+#define NO_DEVICE 0xFFFF
+
 uint32_t pci_read(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset) {
     // bus - index of bus (0-255)
     // slot - device on bus (0-31)
@@ -32,9 +34,8 @@ uint32_t pci_read(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset) {
 
 uint16_t pci_read_vendor(uint8_t bus, uint8_t slot) {
     uint32_t vendor = pci_read(bus, slot, 0, 0);
-    if (vendor == 0xFFFF) return 0xFFFF;  // no device
+    if (vendor == NO_DEVICE) return NO_DEVICE;
     return (uint16_t)vendor;
 }
 
 #endif
-
