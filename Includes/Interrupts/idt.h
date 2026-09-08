@@ -1,6 +1,9 @@
 #ifndef IDT_H
 #define IDT_H
 
+extern void asm_irq0();
+extern void asm_irq1();
+
 typedef struct {
     uint16_t low_bits;
     uint16_t segment;

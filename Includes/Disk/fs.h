@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 #include "disk_state.h"
+#include "Types/ata.h"
+#include "Types/sata.h"
+#include "Types/nvme.h"
 
 #define READ_BLOCKS 8
 #define BLOCK_SIZE  512
@@ -27,6 +30,21 @@ typedef struct {
 } __attribute__((packed)) inode;
 
 static superblock Superblock;
+
+static void check_disks()
+{
+    print_str("[vn]: detecting disk...\n", 0x07);
+    print_str("[vn]: trying SATA...\n", 0x07);
+    sata_check();
+    if (DiskState.SATA) {
+        print_str("[vn]: SATA found\n", 0x0A);
+    }
+    print_str("[vn]: trying NVMe...\n", 0x07);
+    nvme_check();
+    if (DiskState.NVMe) {
+        print_str("[vn]: NVMe found\n", 0x0A);
+    }
+}
 
 static void vnfs_make_superblock()
 {

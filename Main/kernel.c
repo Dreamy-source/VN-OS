@@ -17,24 +17,6 @@ static int cursor_pos_after_print = 0;
 #include "../Includes/System/PCI/pci.h"
 #include "../Includes/System/ACPI/acpi.h"
 
-extern void asm_irq0();
-extern void asm_irq1();
-
-static void check_disks()
-{
-    print_str("[vn]: detecting disk...\n", 0x07);
-    print_str("[vn]: trying SATA...\n", 0x07);
-    sata_check();
-    if (DiskState.SATA) {
-        print_str("[vn]: SATA found\n", 0x0A);
-    }
-    print_str("[vn]: trying NVMe...\n", 0x07);
-    nvme_check();
-    if (DiskState.NVMe) {
-        print_str("[vn]: NVMe found\n", 0x0A);
-    }
-}
-
 void kmain() {
     pic_init(0x20, 0x28);
     print_str("[vn]: pic initialized\n", 0x07);
@@ -53,7 +35,6 @@ void kmain() {
     // RSDT.FADT: power schematic
     // RSDT.MADT: LAPIC, IOAPIC, CPU Info, ISO (transfer IRQ to other side)
     // RSDT.HPET: Timer
-    // RSDT.MCFG: PCI Express Configuration
     print_str("[vn]: locating RSDP...\n", 0x07);
     RSDP* rsdp = locate_rsdp();  // get RSDT address 
     if (rsdp) {
