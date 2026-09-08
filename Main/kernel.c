@@ -16,9 +16,6 @@ static int cursor_pos_after_print = 0;
 #include "../Includes/Disk/Types/nvme.h"
 #include "../Includes/System/PCI/pci.h"
 #include "../Includes/System/ACPI/acpi.h"
-#include "../Includes/System/ACPI/Tables/fadt.h"
-#include "../Includes/System/ACPI/Tables/madt.h"
-#include "../Includes/System/ACPI/Tables/hpet.h"
 
 extern void asm_irq0();
 extern void asm_irq1();
