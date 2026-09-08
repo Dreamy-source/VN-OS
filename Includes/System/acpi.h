@@ -68,7 +68,7 @@ static RSDP* allocate_rsdp()
     return 0;
 }
 
-void *allocate_facp(RSDT *rsdt)
+static void* allocate_facp(RSDT *rsdt)
 {
     int entries = (rsdt->Header.Length - sizeof(SDT)) / 4;
 

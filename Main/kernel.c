@@ -54,6 +54,13 @@ void kmain() {
     } else {
         print_str("[vn]: rsdp not found\n", 0x0C);
     }
+    print_str("[vn]: allocating facp...\n", 0x07);
+    facp = allocate_facp();
+    if (facp) {
+        print_str("[vn]: facp found\n", 0x0A);
+    } else {
+        print_str("[vn]: facp not found\n", 0x0C);
+    }
 
     print_str("\n", 0x07);
 
