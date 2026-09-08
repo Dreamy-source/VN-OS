@@ -6,9 +6,12 @@
 #include "rsdp.h"
 #include "rsdt.h"
 #include "sdt.h"
+#include "gas.h"
 #include "Tables/fadt.h"
 #include "Tables/madt.h"
 #include "Tables/hpet.h"
+
+static FADT* fadt = NULL;
 
 static RSDP* locate_rsdp()
 {
@@ -42,6 +45,29 @@ static void* locate_acpi_table(RSDT* rsdt, unsigned char b0, unsigned char b1, u
     }
 
     return NULL;
+}
+
+static void fadt_init(RSDT* rsdt)
+{
+    fadt = (FADT*)locate_acpi_table(rsdt, 'F', 'A', 'C', 'P');
+}
+
+static void fadt_reboot()
+{    
+    if (fadt) {
+        out(fadt->ResetRegister.Address, fadt->ResetValue);
+    }
+}
+
+static void fadt_shutdown()
+{
+    if (fadt) {
+        // PM1a_CNT_BLK - control port
+        // SLP_TYPa = 7 (shutdown)shutdown)
+
+        // SLP_EN = 1 << 13 (enable sleep/
+        outw(fadt->PM1a_CNT_BLK, (7 << 10) | (1 << 13));
+    }
 }
 
 #endif

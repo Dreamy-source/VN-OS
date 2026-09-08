@@ -41,6 +41,9 @@ typedef struct {
     uint16_t IAPC_BOOT_ARCH;
     uint8_t  Reserved2;
     uint32_t Flags;
+
+    GAS      ResetRegister;
+    uint8_t  ResetValue;
 } __attribute__((packed)) FADT;
 
 #endif

@@ -44,7 +44,7 @@ void kmain() {
             print_str("[vn]: locating MADT...\n", 0x07);
             print_str("[vn]: locating HPET...\n", 0x07);
             print_str("[vn]: RSDP found\n", 0x0A);
-            void* fadt = locate_acpi_table(rsdt, 'F', 'A', 'C', 'P');
+            fadt_init(rsdt);
             void* madt = locate_acpi_table(rsdt, 'A', 'P', 'I', 'C');
             void* hpet = locate_acpi_table(rsdt, 'H', 'P', 'E', 'T');
 
