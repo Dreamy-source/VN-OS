@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include "../../Utils/port.h"
-#include "../../System/pci.h"
+#include "../../System/PCI/pci.h"
 #include "../disk_state.h"
 
 #define DATA              0x1F0

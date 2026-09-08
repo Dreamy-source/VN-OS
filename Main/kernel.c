@@ -14,8 +14,11 @@ static int cursor_pos_after_print = 0;
 #include "../Includes/Disk/Types/ata.h"
 #include "../Includes/Disk/Types/sata.h"
 #include "../Includes/Disk/Types/nvme.h"
-#include "../Includes/System/acpi.h"
-#include "../Includes/System/pci.h"
+#include "../Includes/System/PCI/pci.h"
+#include "../Includes/System/ACPI/acpi.h"
+#include "../Includes/System/ACPI/Tables/fadt.h"
+#include "../Includes/System/ACPI/Tables/madt.h"
+#include "../Includes/System/ACPI/Tables/hpet.h"
 
 extern void asm_irq0();
 extern void asm_irq1();
@@ -45,21 +48,46 @@ void kmain() {
     print_str("[vn]: idt initialized\n", 0x07);
     
     enable_interrupts();
-    print_str("[vn]: interrupts enabled\n", 0x07);
+    print_str("[vn]: interrupts enabled\n", 0x0A);
     
-    print_str("[vn]: allocating rsdp...\n", 0x07);
-    RSDP* rsdp = allocate_rsdp();
+    // ACPI Struct:
+    // RSDP: enter into ACPI
+    // RSDT: list of tables (ex: MADT, FADT)
+    // RSDT.FADT: power schematic
+    // RSDT.MADT: LAPIC, IOAPIC, CPU Info, ISO (transfer IRQ to other side)
+    // RSDT.HPET: Timer
+    // RSDT.MCFG: PCI Express Configuration
+    print_str("[vn]: locating RSDP...\n", 0x07);
+    RSDP* rsdp = locate_rsdp();  // get RSDT address 
     if (rsdp) {
-        print_str("[vn]: rsdp found\n", 0x0A);
+        RSDT* rsdt = (RSDT*)rsdp->RsdtAddress;  // rsdt -> what found "locate_rsdp()"
+        if (rsdt) {
+            print_str("[vn]: locating FADT...\n", 0x07);
+            print_str("[vn]: locating MADT...\n", 0x07);
+            print_str("[vn]: locating HPET...\n", 0x07);
+            print_str("[vn]: RSDP found\n", 0x0A);
+            void* fadt = locate_acpi_table(rsdt, 'F', 'A', 'C', 'P');
+            void* madt = locate_acpi_table(rsdt, 'A', 'P', 'I', 'C');
+            void* hpet = locate_acpi_table(rsdt, 'H', 'P', 'E', 'T');
+
+            if (fadt) {
+                print_str("[vn]: FADT found\n", 0x0A);
+            } else {
+                print_str("[vn]: FADT not found\n", 0x0C);
+            }
+            if (madt) {
+                print_str("[vn]: MADT found\n", 0x0A);
+            } else {
+                print_str("[vn]: MADT not found\n", 0x0C);
+            }
+            if (hpet) {
+                print_str("[vn]: HPET found\n", 0x0A);
+            } else {
+                print_str("[vn]: HPET not found\n", 0x0C);
+            }
+        }
     } else {
-        print_str("[vn]: rsdp not found\n", 0x0C);
-    }
-    print_str("[vn]: allocating facp...\n", 0x07);
-    facp = allocate_facp();
-    if (facp) {
-        print_str("[vn]: facp found\n", 0x0A);
-    } else {
-        print_str("[vn]: facp not found\n", 0x0C);
+        print_str("[vn]: RSDP not found\n", 0x0C);
     }
 
     print_str("\n", 0x07);

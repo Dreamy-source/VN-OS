@@ -2,7 +2,7 @@
 #define PCI_H
 
 #include <stdint.h>
-#include "../Utils/port.h"
+#include "../../Utils/port.h"
 
 #define NO_DEVICE 0xFFFF
 

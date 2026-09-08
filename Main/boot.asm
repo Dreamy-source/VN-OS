@@ -1,8 +1,10 @@
 [org 0x7c00]
 [bits 16]
 
-%define kernel_address 0x9000
-%define kernel_segment 0x0900
+%define KERNEL_KILOBYTES 10
+%define KERNEL_SECTORS   (1024 * KERNEL_KILOBYTES) / 512
+%define kernel_address   0x9000
+%define kernel_segment   0x0900
 
 _start:
     mov [boot_drive], dl
@@ -82,7 +84,7 @@ print:
 dap:
     db 0x10
     db 0x00
-    dw 20
+    dw KERNEL_SECTORS
     dw 0x0000
     dw kernel_segment
     dq 0x0001
