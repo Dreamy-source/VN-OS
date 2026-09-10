@@ -1,0 +1,12 @@
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+
+*.c linguist-language=C
+*.h linguist-language=C
+
+*.asm linguist-language=Assembly
+
+*.bin linguist-generated
+*.img linguist-generated
+*.elf linguist-generated
+*.o linguist-generated
