@@ -1,6 +1,8 @@
 #ifndef STRING_HPP
 #define STRING_HPP
 
+#include "drivers/utils/uint.hpp"
+
 namespace String {
 
 inline void* memcpy(void* dest, const void *src, size_t n)

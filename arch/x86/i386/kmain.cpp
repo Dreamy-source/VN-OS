@@ -1,8 +1,8 @@
 #include "drivers/utils/uint.hpp"
 #include "drivers/utils/string.hpp"
-#include "drivers/video/vga.h"
+#include "drivers/video/vga.hpp"
 
-void kmain(void)
+extern "C" void kmain(void)
 {
     VGA::print_str("meow", 0x0A);
 

@@ -1,6 +1,8 @@
 #ifndef VGA_HPP
 #define VGA_HPP
 
+#include "drivers/utils/uint.hpp"
+
 namespace VGA {
 
 volatile uint8_t *VGA_VIDEO = (volatile uint8_t*)0xB8000;
