@@ -9,7 +9,7 @@ _start:
     mov fs, ax
     mov gs, ax
     mov ss, ax
-    mov esp, 0x200000
+    mov esp, 0x90000
 
     call kmain
 
