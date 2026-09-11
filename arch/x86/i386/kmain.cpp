@@ -1,11 +1,21 @@
-#include "drivers/utils/uint.hpp"
-#include "drivers/utils/string.hpp"
-#include "drivers/video/vga.hpp"
+#include "drivers/services/baseapi.hpp"
 
 extern "C" void kmain(void)
 {
-    VGA::fill_screen(' ', 0x07, 80, 20);
-    VGA::print_str("meow", 0x0A);
-    VGA::print_sym('c', 0x0F);
-    while (1);
+    VGA::fill(' ', 0x07, 80, 20);
+    VGA::prints("starting system boot initialization\n", 0x07);
+    VGA::prints(" [ ] starting kinit hook...\n", 0x07);
+
+    VGA::prints("\nWelcome in ", 0x07);
+    VGA::prints("Vanilla", 0x0F);
+    VGA::printsm('!', 0x07);
+
+    while (1)
+    {
+        // VGA cursor
+        IO::outb(0x3D4, 0x0F);   // cursor location low
+        IO::outb(0x3D5, (uint8_t)(VGA::cursor_pos & 0xFF));
+        IO::outb(0x3D4, 0x0E);
+        IO::outb(0x3D5, (uint8_t)((VGA::cursor_pos >> 8) & 0xFF));
+    };
 }
